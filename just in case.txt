@@ -1,0 +1,2 @@
+//Converting time to a string then using substring to get relevant information
+        //String timeS = time.toString().substring(time.toString().lastIndexOf("T") + 1, time.toString().lastIndexOf("T") + 3);
