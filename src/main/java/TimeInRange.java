@@ -1,32 +1,53 @@
 import java.time.Instant;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
 
 public class TimeInRange
 {
-    public static boolean isInTimeRange(String timeRange, Instant time)
+    public static boolean isInTimeRange(String timeRange, ZonedDateTime time)
     {
-        String timeString = time.toString();
+        // checking if timeRange is null
+        if(timeRange == null)
+        {
+            throw new IllegalArgumentException("IllegalArgumentException, Please make sure the formatting is valid");
+        }
         int range1 =0;
         int range2 =0;
-        // getting the hour variable from time
-        int hours = Instant.parse(timeString).atZone(ZoneId.of("UTC")).get((ChronoField.HOUR_OF_DAY));
 
-        try
+        String[] ss = timeRange.split("-");
+        String range1S = String.format("%02d", Integer.parseInt(ss[0]));
+        String range2S = String.format("%02d", Integer.parseInt(ss[1]));
+
+        timeRange = range1S+"-"+range2S;
+        // more error handling
+        if(time == null || timeRange.length() != 5 || timeRange.charAt(2) != '-')
         {
-            //Splitting the time range into two variables
-             range1 = Integer.parseInt(timeRange.substring(0, 2));
-             range2 = Integer.parseInt(timeRange.substring(3, 5));
+            throw new IllegalArgumentException("IllegalArgumentException, Please make sure the formatting is valid");
         }
-        catch(IllegalArgumentException exception)
+        else
         {
-            System.out.println("IllegalArgumentException, Please make sure the formatting is valid");
+            range1 = Integer.parseInt(timeRange.substring(0, 2));
+            range2 = Integer.parseInt(timeRange.substring(3, 5));
         }
+
+        String timeString = time.toString();
+
+        // getting the hour variable from time
+        int hours = ZonedDateTime.parse(timeString).get(ChronoField.HOUR_OF_DAY);
 
         // Main logic for time in range
-        if (range1 <= hours || range2 >= hours) ;
+        if(range1 == range2 &&  hours ==range1)
         {
             return true;
         }
+        else if(range1 > range2)
+        {
+            int newSmall = range2 ;
+            int newBig = range1 -1;
+            return!(hours >= newSmall && hours <= newBig);
+        }
+
+        return(hours >= range1  && hours < range2);
     }
 }

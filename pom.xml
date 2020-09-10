@@ -16,6 +16,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
+    <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -23,6 +24,16 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.17.2</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
