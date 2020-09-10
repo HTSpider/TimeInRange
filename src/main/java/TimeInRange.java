@@ -14,14 +14,23 @@ public class TimeInRange
         }
         int range1 =0;
         int range2 =0;
-
         String[] ss = timeRange.split("-");
-        String range1S = String.format("%02d", Integer.parseInt(ss[0]));
-        String range2S = String.format("%02d", Integer.parseInt(ss[1]));
 
-        timeRange = range1S+"-"+range2S;
-        // more error handling
-        if(time == null || timeRange.length() != 5 || timeRange.charAt(2) != '-')
+        // checking if it gets two arguments
+        if(ss.length == 2)
+        {
+            String range1S = String.format("%02d", Integer.parseInt(ss[0]));
+            String range2S = String.format("%02d", Integer.parseInt(ss[1]));
+            timeRange = range1S+"-"+range2S;
+        }
+
+        //error handling to check if formatting is right
+        if(!timeRange.matches("\\d{2}-\\d{2}"))
+        {
+            throw new IllegalArgumentException("IllegalArgumentException, Please make sure the formatting is valid");
+        }
+        // error handling to check if formatting is 5 char long
+         if(time == null || timeRange.length() != 5)
         {
             throw new IllegalArgumentException("IllegalArgumentException, Please make sure the formatting is valid");
         }
@@ -47,7 +56,6 @@ public class TimeInRange
             int newBig = range1 -1;
             return!(hours >= newSmall && hours <= newBig);
         }
-
         return(hours >= range1  && hours < range2);
     }
 }

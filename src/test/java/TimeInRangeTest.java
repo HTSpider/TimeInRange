@@ -51,28 +51,22 @@ public class TimeInRangeTest extends TimeInRange
         assertFalse(TimeInRange.isInTimeRange("19-0", makeZonedDateTimeWithHour(3))); // midnight at one end
         assertFalse(TimeInRange.isInTimeRange("0-6", makeZonedDateTimeWithHour(12))); // midnight at one end
 
-
-
-
         // check for bad inputs
         ZonedDateTime input = makeZonedDateTimeWithHour(5);
         catchThrowableOfType(() -> TimeInRange.isInTimeRange("asdsf", input), IllegalArgumentException.class);
         catchThrowableOfType(() -> TimeInRange.isInTimeRange("000-09", input), IllegalArgumentException.class);
         catchThrowableOfType(() -> TimeInRange.isInTimeRange("1-3-7", input), IllegalArgumentException.class);
         catchThrowableOfType(() -> TimeInRange.isInTimeRange("09,01", input), IllegalArgumentException.class);
-        //catchThrowableOfType(() -> TimeInRange.isInTimeRange("0901-", input), IllegalArgumentException.class);
+        catchThrowableOfType(() -> TimeInRange.isInTimeRange("0901-", input), IllegalArgumentException.class);
         catchThrowableOfType(() -> TimeInRange.isInTimeRange("-1214", input), IllegalArgumentException.class);
         catchThrowableOfType(() -> TimeInRange.isInTimeRange("0-25", input), IllegalArgumentException.class);
         catchThrowableOfType(() -> TimeInRange.isInTimeRange("2-500", input), IllegalArgumentException.class);
         catchThrowableOfType(() -> TimeInRange.isInTimeRange("-0", input), IllegalArgumentException.class);
         catchThrowableOfType(() -> TimeInRange.isInTimeRange("09-A", input), IllegalArgumentException.class);
-        //catchThrowableOfType(() -> TimeInRange.isInTimeRange("999", input), IllegalArgumentException.class);
+        catchThrowableOfType(() -> TimeInRange.isInTimeRange("999", input), IllegalArgumentException.class);
         catchThrowableOfType(() -> TimeInRange.isInTimeRange("", input), IllegalArgumentException.class);
         catchThrowableOfType(() -> TimeInRange.isInTimeRange(null, input), IllegalArgumentException.class);
         catchThrowableOfType(() -> TimeInRange.isInTimeRange("9-17", null), IllegalArgumentException.class);
-
-
-
 
     }
 
