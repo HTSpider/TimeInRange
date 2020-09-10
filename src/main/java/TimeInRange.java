@@ -1,8 +1,5 @@
-import java.time.Instant;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
-
 public class TimeInRange
 {
     public static boolean isInTimeRange(String timeRange, ZonedDateTime time)
@@ -12,8 +9,8 @@ public class TimeInRange
         {
             throw new IllegalArgumentException("IllegalArgumentException, Please make sure the formatting is valid");
         }
-        int range1 =0;
-        int range2 =0;
+        int range1;
+        int range2;
         String[] ss = timeRange.split("-");
 
         // checking if it gets two arguments
