@@ -44,7 +44,7 @@ public class TimeInRangeTest extends TimeInRange
         assertTrue(TimeInRange.isInTimeRange("0-6", makeZonedDateTimeWithHour(3))); // midnight at one end
 
         // check for bad times
-        assertFalse(TimeInRange.isInTimeRange("9-17", makeZonedDateTimeWithHour(7))); // normal day
+        assertFalse(TimeInRange.isInTimeRange("9-17", makeZonedDateTimeWithHour(8))); // normal day
         assertFalse(TimeInRange.isInTimeRange("22-06", makeZonedDateTimeWithHour(7))); // overnight
         assertFalse(TimeInRange.isInTimeRange("09-08", makeZonedDateTimeWithHour(8))); // really odd but legal input
         assertFalse(TimeInRange.isInTimeRange("9-09", makeZonedDateTimeWithHour(10))); // totally odd but legal input
